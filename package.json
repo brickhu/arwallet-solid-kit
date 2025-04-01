@@ -22,6 +22,7 @@
     "@arweave-wallet-kit/othent-strategy": "^0.1.1",
     "@arweave-wallet-kit/wander-strategy": "^0.1.2",
     "@arweave-wallet-kit/webwallet-strategy": "^0.0.1-beta.4",
+    "@permaweb/aoconnect": "^0.0.77",
     "solid-js": "^1.9.5"
   },
   "devDependencies": {
@@ -30,11 +31,11 @@
     "vite-plugin-solid": "^2.11.6"
   },
   "peerDependencies": {
-    "solid-js": "^1.9.5",
     "@arweave-wallet-kit/browser-wallet-strategy": "^0.1.1",
     "@arweave-wallet-kit/core": "^0.1.1",
     "@arweave-wallet-kit/othent-strategy": "^0.1.1",
     "@arweave-wallet-kit/wander-strategy": "^0.1.2",
-    "@arweave-wallet-kit/webwallet-strategy": "^0.0.1-beta.4"
+    "@arweave-wallet-kit/webwallet-strategy": "^0.0.1-beta.4",
+    "solid-js": "^1.9.5"
   }
 }

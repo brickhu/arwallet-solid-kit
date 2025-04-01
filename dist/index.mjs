@@ -34202,7 +34202,8 @@ function WalletProvider(re) {
       pe() || (fe(null), $e(null), de(!0));
     },
     wallet: Ke,
-    disconnect: Xe
+    disconnect: Xe,
+    sdk
   };
   return createComponent(WalletContext.Provider, {
     value: cr,

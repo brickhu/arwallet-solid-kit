@@ -20,6 +20,9 @@ export default defineConfig({
           "solid-js": "SolidJS",
         },
       },
-    }
+    },
   },
+  server: {
+    allowedHosts: true
+  }
 });

@@ -102,6 +102,7 @@ export function WalletProvider(props) {
       name : s.name,
       logo : s.logo,
       url : s.url,
+      theme : s.theme
     })
     setConnecting(true)
     setStrategyAvailable(true)
@@ -186,7 +187,7 @@ export function WalletProvider(props) {
                             style={{"display":"flex", "justify-content" : "space-between", "align-items" : "center"}}
                           >
                             <span>{s.name}</span>
-                            <img src={`${gateway_url()}/${s.logo}`} style={{width: "1em", height: "1em"}} />
+                            <img src={`${gateway_url()}/${s.logo}`} style={{width: "1em", height: "1em", background:`rgb(${s.theme || "0,0,0"})`, padding: "6px", "border-radius":"6px"}}/>
                           </button>
                         )
                       }}
@@ -196,7 +197,7 @@ export function WalletProvider(props) {
                 <Match when={connecting()}>
                   <div class={styles.main} style={{"display":"flex","flex-direction":"column","gap":"1em"}}>
                     <div style={{display: "flex", "flex-direction" : "column" , width :"100%", "justify-content" : "center", "align-items" : "center",gap: "0.5em" }}>
-                      <img src={`${gateway_url()}/${connectingInfo()?.logo}`} style={{width: "4em", height: "4em"}} />
+                      <img src={`${gateway_url()}/${connectingInfo()?.logo}`} style={{width: "3em", height: "3em", padding: "1em" , background: `rgb(${connectingInfo()?.theme || "0,0,0"})`, "border-radius":"1em"}} />
                       <div>{connectingInfo()?.name}</div>
                       <div style={{'font-size' : "0.8em", opacity :0.6  , "text-align" : "center"}}>{strategyAvailable()?"Confirm connection request in the wallet popup window":`Not installed ${connectingInfo()?.name} `}</div> 
                     </div>
