@@ -75,6 +75,11 @@ export function WalletProvider(props) {
       _eventlistener = wallet()?.addAddressEvent(handleWalletChange)
       console.log("listener",_eventlistener)
     }
+    if(visible()){
+      document.body.style.overflow = 'hidden';
+    }else{
+      document.body.style.overflow = 'auto';
+    }
   })
 
   async function disconnect() {
