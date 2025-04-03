@@ -221,25 +221,41 @@ export function WalletProvider(props) {
     )
   }
 
+  const showConnector = () => {
+    if(connected()){
+      console.log("[Arweave Wallet Kit] Already connected")
+      return
+    }
+    if(connecting()){
+      return
+    }
+    setAddress(null)
+    setActiveStrategy(null)
+    setVisible(true)
+  }
+
+  const walletConnectionCheck = (element,accessor) => {
+    element.addEventListener("click",(e)=>{
+      if(connected()){
+        accessor()?.()
+      }else{
+        showConnector()
+        e.preventDefault();
+      }
+    })
+  }
+
   const hooks = {
     connected ,
     connecting,
     address,
-    showConnector: () => {
-      if(connected()){
-        console.log("[Arweave Wallet Kit] Already connected")
-        return
-      }
-      if(connecting()){
-        return
-      }
-      setAddress(null)
-      setActiveStrategy(null)
-      setVisible(true)
-    },
+    showConnector,
     wallet,
-    disconnect
+    disconnect,
+    walletConnectionCheck
   };
+
+  
 
   return (
     <WalletContext.Provider value={hooks}>
