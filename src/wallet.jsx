@@ -49,7 +49,7 @@ export function WalletProvider(props) {
       }
     })
     .catch(error=>{
-      console.log("not connected")
+      console.log("[Arweave Wallet Kit] is not connected")
     })
     .finally(()=>setConnecting(false))
   });
@@ -71,7 +71,6 @@ export function WalletProvider(props) {
   createEffect(()=>{
     if(connected()){
       _eventlistener = wallet()?.addAddressEvent(handleWalletChange)
-      console.log("listener",_eventlistener)
     }
     if(visible()){
       document.body.style.overflow = 'hidden';
