@@ -23,6 +23,7 @@
     "@arweave-wallet-kit/wander-strategy": "^0.1.2",
     "@arweave-wallet-kit/webwallet-strategy": "^0.0.1-beta.4",
     "@permaweb/aoconnect": "^0.0.77",
+    "@vela-ventures/aosync-strategy": "^1.0.12",
     "solid-js": "^1.9.5"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 import { createSignal, createContext, useContext, onMount, onCleanup,For, createMemo, createEffect, Switch, Match, Show } from "solid-js";
 import styles from "./wallet.module.css";
+
 import { getStrategy,saveStrategy,syncStrategies } from "@arweave-wallet-kit/core/strategy";
 import { removeStrategy } from "./core/strategy";
 
@@ -8,6 +9,7 @@ const Spiner = () => <svg xmlns="http://www.w3.org/2000/svg" width="1em" height=
 
 export function WalletProvider(props) {
   let _eventlistener = null
+  let _modal
   const permissions = () => props?.config?.permissions || ["ACCESS_ADDRESS","SIGN_TRANSACTION"]
   const strategies = () => props?.config?.strategies || null
   const gateway = () => props?.config?.gatewayConfig || {
@@ -52,6 +54,8 @@ export function WalletProvider(props) {
       console.log("[Arweave Wallet Kit] is not connected")
     })
     .finally(()=>setConnecting(false))
+
+    
   });
 
   onCleanup(() => {
@@ -123,9 +127,10 @@ export function WalletProvider(props) {
           setConnected(true)
           saveStrategy(s.id);
           setActiveStrategy(s.id)
-          setVisible(false)
           setConnecting(false);
           setConnectingInfo(null)
+          setVisible(false)
+          
         }else{
           const error = new Error(`Connecting ${s.name} faild.`)
           error.code = "FAILD"
@@ -151,7 +156,85 @@ export function WalletProvider(props) {
   
 
   const Connector = props => {
+    const css = {
+      "dailog" : {
+        "border-radius": "1em",
+        "border" : "0"
+      },
+      "head" : {
+        "display": "flex",
+        "width": "100%",
+        "justify-content": "space-between",
+        "align-items": "center",
+        "padding": "1em",
+        "box-sizing": "border-box"
+      }
+    }
     return(
+      // <>
+
+      // <dialog ref={_modal} id="ar-wallet-kit" class={styles.arkit}>
+      //     <div className={styles.content}>
+      //         <div style={css.head}>
+      //           <h3>{connecting()?<span style={{display : "inline-flex" , "align-items" : "center", gap: "0.5em"}}><span>Connecting...</span></span>:"Connect to a wallet"}</h3>
+      //           <Show 
+      //             when={!connecting()}
+      //             fallback={strategyAvailable()?<Spiner/>:<button onClick={()=>{setConnecting(false)}}>Back</button>}
+      //           >
+      //             {/* <button disabled={connecting()} onClick={() => setVisible(false)} style={{background : "transparent",  padding: "0" , display: "flex", "justify-content" : "center" , "align-items" : "center" , }}>
+      //               <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path style={{"fill":"currentcolor"}} d="m7.05 5.636l4.95 4.95l4.95-4.95l1.414 1.414l-4.95 4.95l4.95 4.95l-1.415 1.414l-4.95-4.95l-4.949 4.95l-1.414-1.414l4.95-4.95l-4.95-4.95z"></path></svg>
+      //             </button> */}
+      //             <form method="dialog">
+      //               <button disabled={connecting()} style={{background : "transparent",  padding: "0" , display: "flex", "justify-content" : "center" , "align-items" : "center" , }}>
+      //                 <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path style={{"fill":"currentcolor"}} d="m7.05 5.636l4.95 4.95l4.95-4.95l1.414 1.414l-4.95 4.95l4.95 4.95l-1.415 1.414l-4.95-4.95l-4.949 4.95l-1.414-1.414l4.95-4.95l-4.95-4.95z"></path></svg>
+      //               </button>
+      //             </form>
+      //           </Show>
+                
+                
+      //         </div>
+      //         <Switch>
+      //           <Match when={!connecting()}>
+      //             <div class={styles.main} style={{"display":"flex","flex-direction":"column","gap":"1em"}}>
+      //               <For each={strategies()} fallback={<div>no strategies</div>}>
+      //                 {s=>{
+      //                   return (
+      //                     <button 
+      //                       class={styles.btn}
+      //                       disabled={connecting()}
+      //                       onClick={()=>{
+      //                         tryConnecting(s)
+      //                       }}
+      //                       style={{"display":"flex", "justify-content" : "space-between", "align-items" : "center"}}
+      //                     >
+      //                       <span>{s.name}</span>
+      //                       <img src={`${gateway_url()}/${s.logo}`} style={{width: "16px", height: "16px", background:`rgb(${s.theme || "0,0,0"})`, padding: "6px", "border-radius":"6px", "box-sizing": "content-box"}}/>
+      //                     </button>
+      //                   )
+      //                 }}
+      //               </For>
+      //             </div>
+      //           </Match>
+      //           <Match when={connecting()}>
+      //             <div class={styles.main} style={{"display":"flex","flex-direction":"column","gap":"1em"}}>
+      //               <div style={{display: "flex", "flex-direction" : "column" , width :"100%", "justify-content" : "center", "align-items" : "center",gap: "0.5em" }}>
+      //                 <img src={`${gateway_url()}/${connectingInfo()?.logo}`} style={{width: "48px", height: "48px", padding: "16px" , background: `rgb(${connectingInfo()?.theme || "0,0,0"})`, "border-radius":"16px", "box-sizing": "content-box"}} />
+      //                 <div>{connectingInfo()?.name}</div>
+      //                 <div style={{'font-size' : "0.8em", opacity :0.6  , "text-align" : "center"}}>{strategyAvailable()?"Confirm connection request in the wallet popup window":`Not installed ${connectingInfo()?.name} `}</div> 
+      //               </div>
+      //               <Show when={!strategyAvailable()}>
+      //                 <button role="link" class={styles.btn}>Install {connectingInfo()?.name}</button>
+      //               </Show>
+      //               {/* <button class={styles.btn}>cancel</button> */}
+      //             </div>
+      //           </Match>
+      //         </Switch>
+      //         <div class={styles.foot}>Don't have a wallet? <a href="https://arwiki.wiki/#/en/wallets" target="_blank">Get a new</a></div>
+      //     </div>
+      // </dialog>
+      // </>
+      
+      
       <div class={styles.outter} id="solid-arwallet-connector" style={{ visibility: `${visible() ? "visible" : "hidden"}` }}>
           <div
             class={styles.container}
@@ -228,7 +311,7 @@ export function WalletProvider(props) {
     }
     setAddress(null)
     setActiveStrategy(null)
-    setVisible(true)
+    setVisible(true);
   }
 
   const walletConnectionCheck = (element,accessor) => {
@@ -257,7 +340,10 @@ export function WalletProvider(props) {
   return (
     <WalletContext.Provider value={hooks}>
       {props.children}
-      <Connector/>
+
+      <Portal>
+          <Connector/>
+        </Portal>
     </WalletContext.Provider>
   );
 }

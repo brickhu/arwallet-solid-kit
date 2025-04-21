@@ -1,7 +1,6 @@
 
 
 
-
 .outter {
   position: fixed;
   top: 0;
@@ -120,7 +119,7 @@
 
 .content{
   max-width: 320px;
-  width: 100%;
+  width: 320px;
   background-color: rgb(from var(--color-base-100) r g b / 60%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -162,5 +161,3 @@
 }
 
 
-
-/* 确保没有全局样式，所有样式都通过 :host 作用于局部 */

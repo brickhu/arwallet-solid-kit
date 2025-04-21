@@ -3,6 +3,7 @@ import { render } from 'solid-js/web'
 import './index.css'
 import App from './App.jsx'
 import { WalletProvider, WanderStrategy,OthentStrategy,WebWalletStrategy,BrowserWalletStrategy } from 'src'
+import AoSyncStrategy from "@vela-ventures/aosync-strategy";
 
 
 const root = document.getElementById('root')
@@ -22,6 +23,7 @@ render(() => <WalletProvider config={{
     new BrowserWalletStrategy(),
     new WanderStrategy(),
     new OthentStrategy(),
-    new WebWalletStrategy()
+    new WebWalletStrategy(),
+    new AoSyncStrategy()
   ],
 }}><App /></WalletProvider>, root)
