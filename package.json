@@ -16,19 +16,17 @@
   "keywords": [],
   "author": "fei",
   "license": "ISC",
-  "devDependencies": {
-    "vite": "^6.2.3",
-    "vite-plugin-css-injected-by-js": "^3.5.2",
-    "vite-plugin-solid": "^2.11.6",
-    "solid-js": "^1.9.5",
-    "@permaweb/aoconnect": "^0.0.77"
-  },
   "peerDependencies": {
     "@arweave-wallet-kit/browser-wallet-strategy": "^0.1.1",
     "@arweave-wallet-kit/core": "^0.1.1",
     "@arweave-wallet-kit/othent-strategy": "^0.1.1",
     "@arweave-wallet-kit/wander-strategy": "^0.1.2",
     "@arweave-wallet-kit/webwallet-strategy": "^0.0.1-beta.4",
-    "@vela-ventures/aosync-strategy": "^1.0.12"
+    "@vela-ventures/aosync-strategy": "^1.0.12",
+    "vite": "^6.2.3",
+    "vite-plugin-css-injected-by-js": "^3.5.2",
+    "vite-plugin-solid": "^2.11.6",
+    "solid-js": "^1.9.5",
+    "@permaweb/aoconnect": "^0.0.77"
   }
 }

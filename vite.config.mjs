@@ -14,7 +14,7 @@ export default defineConfig({
     },
     outDir: "dist",
     rollupOptions: {
-      external: ["solid-js"],
+      external: ["solid-js","@arweave-wallet-kit/core/strategy"],
       output: {
         globals: {
           "solid-js": "SolidJS",
