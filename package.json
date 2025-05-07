@@ -22,7 +22,7 @@
     "@arweave-wallet-kit/othent-strategy": "^0.1.1",
     "@arweave-wallet-kit/wander-strategy": "^0.1.2",
     "@arweave-wallet-kit/webwallet-strategy": "^0.0.1-beta.4",
-    "@vela-ventures/aosync-strategy": "^1.0.12",
+    "@vela-ventures/aosync-strategy": "^1.0.12"
   },
   "devDependencies": {
     "vite": "^6.2.3",
