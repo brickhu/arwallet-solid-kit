@@ -2,8 +2,8 @@
 import { render } from 'solid-js/web'
 import './index.css'
 import App from './App.jsx'
-import { WalletProvider, WanderStrategy,OthentStrategy,WebWalletStrategy,BrowserWalletStrategy } from 'src'
-import AoSyncStrategy from "@vela-ventures/aosync-strategy";
+import { WalletProvider,BrowserWalletStrategy,WAuthStrategy,WAuthProviders } from 'src'
+// import AoSyncStrategy from "@vela-ventures/aosync-strategy";
 
 
 const root = document.getElementById('root')
@@ -21,9 +21,8 @@ render(() => <WalletProvider config={{
   ensurePermissions: true,
   strategies: [
     new BrowserWalletStrategy(),
-    new WanderStrategy(),
-    new OthentStrategy(),
-    new WebWalletStrategy(),
-    new AoSyncStrategy()
+    new WAuthStrategy({ provider: WAuthProviders.Github }),
+    new WAuthStrategy({ provider: WAuthProviders.Discord }),
+    new WAuthStrategy({ provider: WAuthProviders.Google }),
   ],
 }}><App /></WalletProvider>, root)
